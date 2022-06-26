@@ -2,19 +2,22 @@
   "name": "fii-simple",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server.js",
   "scripts": {
-    "start": "node -r dotenv/config --experimental-modules --es-module-specifier-resolution=node ./src/server.js",
+    "start": "node src/server.mjs",
+    "build": "echo \"No build required...\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "FII"
+  ],
+  "author": "Filipe Salvarez Rezende",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "cheerio": "^1.0.0-rc.11",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "got": "^12.1.0"
-  }
+  },
+  "devDependencies": {}
 }
