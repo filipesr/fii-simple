@@ -1,0 +1,24 @@
+node_modules/
+
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+lerna-debug.log
+.serverless
+
+.env
+.env.test
+.custom-env
+
+# cache files
+.yarn/cache
+.yarn/unplugged
+.yarn/install-state.gz
+.eslintcache
+.cache
+.parcel-cache
+.npm
+
+# vs editor related files
+.vscode-test
+.vscode
