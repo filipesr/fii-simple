@@ -1,5 +1,7 @@
 import http from 'http';
 import express from 'express';
+import jsonxml from 'jsontoxml'
+
 import Fii from './api/Fii.mjs'
 
 // console.log(process.env);
@@ -22,6 +24,16 @@ router.use((req, res, next) => {
       res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST');
       return res.status(200).json({});
   }
+  // APP_KEY
+  const token = req.headers['x-access-token'] || req.headers['authorization'];
+  if (process.env.APP_KEY && `Bearer ${process.env.APP_KEY}` !== token){
+    return res.status(401).json({
+      success: false,
+      message: 'Token is not valid',
+      token
+    });
+  }
+
   next();
 });
 
@@ -30,6 +42,38 @@ router.get('/', async (req, res, next) => {
   return res.status(200).json({
     message: "Tudo certo!"
   });
+});
+
+router.get('/csv/:ticker', async (req, res, next) => {
+  // get the post ticker from the req
+  const ticker = req.params.ticker;
+  const ret = await Fii(ticker, "csv");
+  // get some posts
+  return res.status(200).send(ret);
+});
+
+router.get('/xml/:ticker', async (req, res, next) => {
+  // get the post ticker from the req
+  const ticker = req.params.ticker;
+  const data = await Fii(ticker);
+  //Converting JSON result to XML  
+  const xml = jsonxml(  
+    { data },
+    { 
+      removeIllegalNameCharacters: true,
+      xmlHeader: true,
+    }
+  );  
+  // get some posts
+  return res.status(200).header("Content-Type", "application/xml").send(xml);
+});
+
+router.get('/values/:ticker/:pos', async (req, res, next) => {
+  // get the post ticker from the req
+  const {ticker, pos = 2} = req.params;
+  const ret = await Fii(ticker, "values");
+  // get some posts
+  return res.status(200).send(ret[pos]);
 });
 
 router.get('/:ticker', async (req, res, next) => {

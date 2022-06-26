@@ -23,6 +23,7 @@ fsrezende.com.br
 * [Cheerio](https://cheerio.js.org/)
 * [Got](https://github.com/sindresorhus/got)
 * [Express](https://expressjs.com/)
+* [jsontoxml](https://github.com/soldair/node-jsontoxml/)
 
 ## Contact
 * Homepage: [fsrezende.com.br](https://fsrezende.com.br/)

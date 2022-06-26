@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "start": "node src/server.mjs",
+    "start": "node -r dotenv/config src/server.mjs",
     "build": "echo \"No build required...\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +17,8 @@
     "cheerio": "^1.0.0-rc.11",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "got": "^12.1.0"
+    "got": "^12.1.0",
+    "jsontoxml": "^1.0.1"
   },
   "devDependencies": {}
 }
