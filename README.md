@@ -29,8 +29,8 @@ fsrezende.com.br
 #return: 
 <?xml version="1.0" encoding="utf-8"?>
 <data>
-	<Dividend_Yield>1,71%</Dividend_Yield><Último_Rendimento>R$1,72
-	</Último_Rendimento>
+	<Dividend_Yield>1,71%</Dividend_Yield>
+	<Último_Rendimento>R$1,72</Último_Rendimento>
 	<Patrimônio_Líquido>R$2,31 B</Patrimônio_Líquido>
 	<Valor_Patrimonial_por_Cota>R$95,25</Valor_Patrimonial_por_Cota>
 	<fund-ticker>RECR11</fund-ticker>
