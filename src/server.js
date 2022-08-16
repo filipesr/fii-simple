@@ -25,14 +25,14 @@ router.use((req, res, next) => {
       return res.status(200).json({});
   }
   // APP_KEY
-  // const token = req.headers['x-access-token'] || req.headers['authorization'];
-  // if (process.env.APP_KEY && `Bearer ${process.env.APP_KEY}` !== token){
-  //   return res.status(401).json({
-  //     success: false,
-  //     message: 'Token is not valid',
-  //     token
-  //   });
-  // }
+  const token = req.headers['x-access-token'] || req.headers['authorization'];
+  if (`Bearer ${process.env.APP_KEY}` !== token){
+    return res.status(401).json({
+      success: false,
+      message: 'Token is not valid',
+      token
+    });
+  }
 
   next();
 });
