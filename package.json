@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/server.js",
+  "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config src/server.mjs",
+    "dev": "nodemon -r dotenv/config src/server.js",
+    "start": "node -r dotenv/config src/server.js",
     "build": "echo \"No build required...\" && exit 0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +22,10 @@
     "got": "^12.1.0",
     "jsontoxml": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "nodemonConfig": {
+    "delay": 2500
+  }
 }

@@ -2,7 +2,7 @@ import http from 'http';
 import express from 'express';
 import jsonxml from 'jsontoxml'
 
-import Fii from './api/Fii.mjs'
+import Fii from './api/Fii.js'
 
 // console.log(process.env);
 
@@ -25,14 +25,14 @@ router.use((req, res, next) => {
       return res.status(200).json({});
   }
   // APP_KEY
-  const token = req.headers['x-access-token'] || req.headers['authorization'];
-  if (process.env.APP_KEY && `Bearer ${process.env.APP_KEY}` !== token){
-    return res.status(401).json({
-      success: false,
-      message: 'Token is not valid',
-      token
-    });
-  }
+  // const token = req.headers['x-access-token'] || req.headers['authorization'];
+  // if (process.env.APP_KEY && `Bearer ${process.env.APP_KEY}` !== token){
+  //   return res.status(401).json({
+  //     success: false,
+  //     message: 'Token is not valid',
+  //     token
+  //   });
+  // }
 
   next();
 });
@@ -79,11 +79,11 @@ router.get('/values/:ticker/:pos', async (req, res, next) => {
 router.get('/:ticker', async (req, res, next) => {
   // get the post ticker from the req
   const ticker = req.params.ticker;
-  const ret = await Fii(ticker);
+  const data = await Fii(ticker);
   // get some posts
   return res.status(200).json({
     ticker,
-    ret
+    data
   });
 });
 
