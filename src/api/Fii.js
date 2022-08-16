@@ -21,6 +21,7 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
     { title: "DateOnCVM", selector: "#informations--basic .wrapper:nth-child(1) .item:nth-child(4) .value" },
     { title: "NumberOfQuota", selector: "#informations--basic .wrapper:nth-child(2) .item:nth-child(1) .value" },
     { title: "NumberOfQuotaHolders", selector: "#informations--basic .wrapper:nth-child(2) .item:nth-child(2) .value" },
+    { title: "lastRevenuesTable", selector: "#last-revenues--table tbody tr", childs: [ "DataBase", "DatePayment", "BaseQuotation", "DY", "Dividend" ]}
   ];
 
   const ret = await got(`${fiiUrl}${ticker}`).then(response => {
@@ -29,11 +30,29 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
     const arrValue = [];
     const jsonObject = {};
     selItens.forEach( item => {
-      const itemValue = $(item.selector).text();
-      arrValue[arrValue.length] = itemValue;
-      jsonObject[item.title] = itemValue;
-    })
+      const {title, selector, childs = false} = item;
+      jsonObject[title] = [];
+      $(selector).each((indexElem, elem) => {
+        // console.log(title, indexElem);
+        // jsonObject[title][index] = $(elem).find('td:first').text();
+        const tmpObj = {};
 
+        if ( childs ) {
+          childs.forEach((selChildItem, indexChildItem) => {
+            if(selChildItem) {
+              const filterChild = `td:nth-child(${indexChildItem + 1})`;
+              tmpObj[selChildItem] = $(elem).find(filterChild).text();
+            }
+          })
+          jsonObject[title][indexElem] = tmpObj;
+        } else {
+          const itemValue = $(elem).text();
+          jsonObject[title] = itemValue;
+          arrValue.push(itemValue);
+        }
+      })
+    })
+    
     if(type == "values") return arrValue;
     if(type == "csv") return arrValue.join(";");
 
