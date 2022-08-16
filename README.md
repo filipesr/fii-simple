@@ -9,32 +9,52 @@ fsrezende.com.br
 #return: 
 {
 	"ticker": "RECR11",
-	"ret": {
-		"Dividend Yield": "1,71%",
-		"Último Rendimento": "R$1,72",
-		"Patrimônio Líquido": "R$2,31 B",
-		"Valor Patrimonial por Cota": "R$95,25",
-		"fund-ticker": "RECR11",
-		"fund-name": "REC Recebíveis Imobiliários"
+	"data": {
+		"Ticker": "RECR11",
+		"Name": "REC Recebíveis Imobiliários",
+		"Administrator": "BRL Trust DTVM",
+		"DividendYield": "1,08%",
+		"LastYield": "R$1,02",
+		"Equity": "R$2,52 B",
+		"PatrimonialValuePerQuota": "R$95,45",
+		"CurrentQuota": "94,39",
+		"Min52weeks": "90,20",
+		"Max52weeks": "106,40",
+		"Valorization12months": "8,63",
+		"TypeOfFII": "Papel: CRIs",
+		"TypeOfANBIMA": "Títulos e Valores Mobiliários Gestão Ativa",
+		"DateOnCVM": "21/07/2017",
+		"NumberOfQuota": "26.441.650",
+		"NumberOfQuotaHolders": "172.375"
 	}
 }
 ```
 ## call on http://localhost:3000/csv/RECR11
 ```
 #return: 
-1,71%;R$1,72;R$2,31 B;R$95,25
+RECR11;REC Recebíveis Imobiliários;BRL Trust DTVM;1,08%;R$1,02;R$2,52 B;R$95,45;94,39;90,20;106,40;8,63;Papel: CRIs;Títulos e Valores Mobiliários Gestão Ativa;21/07/2017;26.441.650;172.375
 ```
 ## call on http://localhost:3000/xml/RECR11
 ```
 #return: 
 <?xml version="1.0" encoding="utf-8"?>
 <data>
-	<Dividend_Yield>1,71%</Dividend_Yield>
-	<Último_Rendimento>R$1,72</Último_Rendimento>
-	<Patrimônio_Líquido>R$2,31 B</Patrimônio_Líquido>
-	<Valor_Patrimonial_por_Cota>R$95,25</Valor_Patrimonial_por_Cota>
-	<fund-ticker>RECR11</fund-ticker>
-	<fund-name>REC Recebíveis Imobiliários</fund-name>
+	<Ticker>SRVD11</Ticker>
+	<Name>Serra Verde</Name>
+	<Administrator>Vórtx DTVM LTDA</Administrator>
+	<DividendYield>2,57%</DividendYield>
+	<LastYield>R$0,20</LastYield>
+	<Equity>R$71,73 M</Equity>
+	<PatrimonialValuePerQuota>R$0,75</PatrimonialValuePerQuota>
+	<CurrentQuota>7,79</CurrentQuota>
+	<Min52weeks>7,00</Min52weeks>
+	<Max52weeks>10,00</Max52weeks>
+	<Valorization12months>19,11</Valorization12months>
+	<TypeOfFII>Indefinido</TypeOfFII>
+	<TypeOfANBIMA>Títulos e Valores Mobiliários Gestão Ativa</TypeOfANBIMA>
+	<DateOnCVM>--/--/--</DateOnCVM>
+	<NumberOfQuota>96.286.021</NumberOfQuota>
+	<NumberOfQuotaHolders>92</NumberOfQuotaHolders>
 </data>
 ```
 ## Technology
