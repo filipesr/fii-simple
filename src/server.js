@@ -13,6 +13,13 @@ router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
 router.use(express.json());
 
+router.get('/', async (req, res, next) => {
+  // get some posts
+  return res.status(200).json({
+    message: "Tudo certo!"
+  });
+});
+
 /** RULES OF OUR API */
 router.use((req, res, next) => {
   // set the CORS policy
@@ -35,13 +42,6 @@ router.use((req, res, next) => {
   }
 
   next();
-});
-
-router.get('/', async (req, res, next) => {
-  // get some posts
-  return res.status(200).json({
-    message: "Tudo certo!"
-  });
 });
 
 router.get('/csv/:ticker', async (req, res, next) => {
