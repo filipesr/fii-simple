@@ -42,6 +42,8 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
   const ret = await got(`${fiiUrl}${ticker}`).then(response => {
     const $ = load(response.body);
 
+    if ($("#not-found-index").length) return {error: true, message: "ticker not found!"};
+
     const arrValue = [];
     const jsonObject = {};
     selItens.forEach( item => {
@@ -74,7 +76,7 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
     return jsonObject;
 
   }).catch(err => {
-    return err;
+    return {error: true, message: "ticker not found!", err};
   });
 
   return ret;

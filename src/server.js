@@ -47,15 +47,17 @@ router.use((req, res, next) => {
 router.get('/csv/:ticker', async (req, res, next) => {
   // get the post ticker from the req
   const ticker = req.params.ticker;
-  const ret = await Fii(ticker, "csv");
+  const data = await Fii(ticker, "csv");
+  if ( data.error ) return res.status(404).json(data);
   // get some posts
-  return res.status(200).send(ret);
+  return res.status(200).send(data);
 });
 
 router.get('/xml/:ticker', async (req, res, next) => {
   // get the post ticker from the req
   const ticker = req.params.ticker;
   const data = await Fii(ticker);
+  if ( data.error ) return res.status(404).json(data);
   //Converting JSON result to XML  
   const xml = jsonxml(  
     { data },
@@ -71,15 +73,17 @@ router.get('/xml/:ticker', async (req, res, next) => {
 router.get('/values/:ticker/:pos', async (req, res, next) => {
   // get the post ticker from the req
   const {ticker, pos = 2} = req.params;
-  const ret = await Fii(ticker, "values");
+  const data = await Fii(ticker, "values");
+  if ( data.error ) return res.status(404).json(data);
   // get some posts
-  return res.status(200).send(ret[pos]);
+  return res.status(200).send(data[pos]);
 });
 
 router.get('/:ticker', async (req, res, next) => {
   // get the post ticker from the req
   const ticker = req.params.ticker;
   const data = await Fii(ticker);
+  if ( data.error ) return res.status(404).json(data);
   // get some posts
   return res.status(200).json({
     ticker,
