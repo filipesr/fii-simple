@@ -21,7 +21,22 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
     { title: "DateOnCVM", selector: "#informations--basic .wrapper:nth-child(1) .item:nth-child(4) .value" },
     { title: "NumberOfQuota", selector: "#informations--basic .wrapper:nth-child(2) .item:nth-child(1) .value" },
     { title: "NumberOfQuotaHolders", selector: "#informations--basic .wrapper:nth-child(2) .item:nth-child(2) .value" },
-    { title: "lastRevenuesTable", selector: "#last-revenues--table tbody tr", childs: [ "DataBase", "DatePayment", "BaseQuotation", "DY", "Dividend" ]}
+    { title: "lastRevenuesTable", selector: "#last-revenues--table tbody tr", 
+      childs: [ 
+        {title: "DataBase", selector: "td:nth-child(1)"}, 
+        {title: "DatePayment", selector: "td:nth-child(2)"}, 
+        {title: "BaseQuotation", selector: "td:nth-child(3)"}, 
+        {title: "DY", selector: "td:nth-child(4)"}, 
+        {title: "Dividend", selector: "td:nth-child(5)"},
+      ]
+    },
+    { title: "news", selector: "#news--wrapper ul li", 
+      childs: [ 
+        {title: "date", selector: ".date"}, 
+        {title: "text", selector: ".title"}, 
+        {title: "link", selector: "a:not(.nolink)", attr: "href"}, 
+      ]
+    },
   ];
 
   const ret = await got(`${fiiUrl}${ticker}`).then(response => {
@@ -38,11 +53,11 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
         const tmpObj = {};
 
         if ( childs ) {
-          childs.forEach((selChildItem, indexChildItem) => {
-            if(selChildItem) {
-              const filterChild = `td:nth-child(${indexChildItem + 1})`;
-              tmpObj[selChildItem] = $(elem).find(filterChild).text();
-            }
+          childs.forEach((child) => {
+            const {selector: filterChild, title: titleChild, attr = false} = child;
+            tmpObj[titleChild] = attr 
+              ? $(elem).find(filterChild).attr(attr) 
+              : $(elem).find(filterChild).text();
           })
           jsonObject[title][indexElem] = tmpObj;
         } else {
