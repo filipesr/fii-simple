@@ -48,6 +48,7 @@ export default async function Fii(ticker = 'abacaxi', type = "all") {
     const jsonObject = {};
     selItens.forEach( item => {
       const {title, selector, childs = false} = item;
+      if(childs && type != "all") return;
       jsonObject[title] = [];
       $(selector).each((indexElem, elem) => {
         // console.log(title, indexElem);

@@ -56,7 +56,7 @@ router.get('/csv/:ticker', async (req, res, next) => {
 router.get('/xml/:ticker', async (req, res, next) => {
   // get the post ticker from the req
   const ticker = req.params.ticker;
-  const data = await Fii(ticker);
+  const data = await Fii(ticker, "xml");
   if ( data.error ) return res.status(404).json(data);
   //Converting JSON result to XML  
   const xml = jsonxml(  
